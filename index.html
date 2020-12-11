@@ -19,7 +19,7 @@
     <div id="my_dataviz"></div>
 
     <script>
-        let getRequest = function (endpoint, errorMsg, callback) {
+        let getRequest = function (endpoint, callback) {
             let xhr = new XMLHttpRequest()
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
