@@ -41,6 +41,7 @@
             }
             
             console.log(myWords)
+            console.log(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
 
             // List of words
             // var myWords = [{% for name in res %}{word: "{{res[name]['name']}}", size: "{{res[name]['tweet_volume']}}", url:"{{res[name]['url']}}"},
