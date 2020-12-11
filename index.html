@@ -38,7 +38,7 @@
 
             var myWords = []
             for (var item in drow) {
-                myWords.push({ text: drow[item]["name"],size: String(drow[item]["tweet_volume"]),url: drow[item]["url"] });
+                myWords.push({ text: drow[item]["name"],size: String(drow[item]["tweet_volume"]*1.5),url: drow[item]["url"] });
             }
             // myWords=myWords.slice(10,20)
             // console.log(myWords)
