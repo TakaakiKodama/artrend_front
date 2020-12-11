@@ -68,15 +68,13 @@
                 // .words(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
                 .words(
                         myWords.forEach(function (value, key) {
-                                {
-                                    return {
-                                        text: value.name,
-                                        size: value.tweet_volume,
-                                        url: value.url
-                                        }
-                                }
+                                return {
+                                    text: value.name,
+                                    size: value.tweet_volume,
+                                    url: value.url
+                                    };
                             }
-                        )
+                        );
 
                     )
                 .padding(5)				//space between words
