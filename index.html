@@ -35,12 +35,13 @@
         }
 
         getRequest("https://artrends.herokuapp.com/", function (drow) {
+
             var myWords = []
             for (var item in drow) {
-                myWords.push({ text: drow[item]["name"],size: drow[item]["tweet_volume"],url: drow[item]["url"] });
+                myWords.push({ text: drow[item]["name"],size: String(drow[item]["tweet_volume"]),url: drow[item]["url"] });
             }
-            // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"}, ]
-            console.log(myWords)
+            // myWords=myWords.slice(10,20)
+            // console.log(myWords)
             // console.log(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
 
             // List of words
@@ -69,7 +70,8 @@
             // Wordcloud features that are different from one word to the other must be here
             var layout = d3.layout.cloud()
                 .size([width, height])
-                .words(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
+                // .words(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
+                .words(myWords)
                 // .words(myWords.forEach(function (value, key) { return {text: value.name,size: value.tweet_volume,url: value.url};}))
                 .padding(5)				//space between words
                 .rotate(function () { return (~~(Math.random() * 2) - 1) * 90; })
