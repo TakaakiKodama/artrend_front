@@ -35,7 +35,9 @@
         }
 
         getRequest("https://artrends.herokuapp.com/", function (drow) {
-
+            for (var item in drow) {
+                console.log(drow[item])
+            }
             var myWords = drow
             console.log(drow)
 
