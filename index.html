@@ -35,13 +35,13 @@
         }
 
         getRequest("https://artrends.herokuapp.com/", function (drow) {
-            // var myWords = []
-            // for (var item in drow) {
-            //     myWords.push({ text: drow[item]["name"],size: drow[item]["tweet_volume"],url: drow[item]["url"] });
-            // }
-            var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"}, ]
+            var myWords = []
+            for (var item in drow) {
+                myWords.push({ text: drow[item]["name"],size: drow[item]["tweet_volume"],url: drow[item]["url"] });
+            }
+            // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"}, ]
             console.log(myWords)
-            console.log(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
+            // console.log(myWords.map(function (d) { return { text: d.word, size: d.size, url: d.url }; }))
 
             // List of words
             // var myWords = [{% for name in res %}{word: "{{res[name]['name']}}", size: "{{res[name]['tweet_volume']}}", url:"{{res[name]['url']}}"},
