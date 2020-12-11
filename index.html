@@ -35,11 +35,12 @@
         }
 
         getRequest("https://artrends.herokuapp.com/", function (drow) {
+            var myWords = []
             for (var item in drow) {
-                console.log(drow[item])
+                myWords.push({ text: drow[item]["name"],size: drow[item]["tweet_volume"],url: drow[item]["url"] });
             }
-            var myWords = drow
-            console.log(drow)
+            
+            console.log(myWords)
 
             // List of words
             // var myWords = [{% for name in res %}{word: "{{res[name]['name']}}", size: "{{res[name]['tweet_volume']}}", url:"{{res[name]['url']}}"},
