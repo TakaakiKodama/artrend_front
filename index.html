@@ -15,15 +15,19 @@
 </head>
 
 <body>
-
+    <div class="loader-wrap" id="fade">
+        <div class="loader">Loading...</div>
+    </div>
     <div id="my_dataviz"></div>
 
     <script>
-        let getRequest = function (endpoint, callback) {
+        function getRequest(endpoint) {
             let xhr = new XMLHttpRequest()
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    callback(this.response)
+                    // callback(this.response)
+                    console.log(this.response)
+                    return this.response
                 }
                 // else if (this.readyState === 4 && this.status !== 200) {
                 //     alert(errorMsg)
@@ -33,12 +37,14 @@
             xhr.open('GET', endpoint, true)
             xhr.send()
         }
-
-        getRequest("https://artrends.herokuapp.com/", function (drow) {
-
+        let drawWordCloud = function (drow) {
+            var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            var expandRatio = 0.0014 * (width > height ? width : height);
             var myWords = []
             for (var item in drow) {
-                myWords.push({ text: drow[item]["name"],size: String(drow[item]["tweet_volume"]*1.5),url: drow[item]["url"] });
+                myWords.push({ text: drow[item]["name"], size: String(drow[item]["tweet_volume"] * expandRatio), url: drow[item]["url"] });
             }
             // myWords=myWords.slice(10,20)
             // console.log(myWords)
@@ -50,9 +56,7 @@
             // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"}, ]
 
             // set the dimensions and margins of the graph
-            var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-                width = window.innerWidth;
-            height = window.innerHeight;
+
 
             // width = 600 - margin.left - margin.right,
             // height = 600 - margin.top - margin.bottom;
@@ -61,7 +65,7 @@
             var svg = d3.select("#my_dataviz").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-                .style("background-color", "#B3E5FC")
+                // .style("background-color", "#B3E5FC")
                 .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
@@ -76,7 +80,7 @@
                 .padding(5)				//space between words
                 .rotate(function () { return (~~(Math.random() * 2) - 1) * 90; })
                 .fontSize(function (d) { return d.size; })			// font size of words
-                .on("end", draw);
+                .on("end", draw)
             layout.start();
 
             // This function takes the output of 'layout' above and draw the words
@@ -101,9 +105,19 @@
                     .on("click", function (d, i) {
                         window.open(d.url);
                     });
-            }
-            ;
-        })
+                const loader = document.getElementById('fade');
+                console.log(loader)
+                loader.classList.add('fadeout');
+            };
+        }
+        // let data = getRequest("https://artrends.herokuapp.com/")
+        // let data = fetch('https://artrends.herokuapp.com/').then(response => { return response.json(); })
+        // console.log(data)
+        fetch('https://artrends.herokuapp.com/')
+            .then(response => response.json())
+            .then(data => drawWordCloud(data));
+
+
 
     </script>
 </body>
