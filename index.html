@@ -41,7 +41,7 @@
             var margin = { top: 0, right: 0, bottom: 0, left: 0 };
             var width = window.innerWidth;
             var height = window.innerHeight;
-            var expandRatio = 0.0014 * (width > height ? width : height);
+            var expandRatio = 0.0008 * (width > height ? width : height);
             var myWords = []
             for (var item in drow) {
                 myWords.push({ text: drow[item]["name"], size: String(drow[item]["tweet_volume"] * expandRatio), url: drow[item]["url"] });
